@@ -7,10 +7,11 @@ const Login = () => {
   const { user, loading, signIn } = useContext(AuthContext);
   
 
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
+  console.log(error);
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+      event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -23,7 +24,8 @@ const Login = () => {
           form.reset();
         })
         .catch(error => {
-        console.error(error);
+          setError(error.message);
+          // console.log(error);
       })
     }
 
@@ -31,8 +33,7 @@ const Login = () => {
       <div className="hero bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center">
-            {/* <img src={user?.photoURL} alt="" /> */}
-            <h2>{ user?.email}</h2>
+            <h2>{error}</h2>
             <h1 className="text-5xl font-bold">Login now!</h1>
           </div>
           <div className="card w-96 shadow-2xl bg-base-100">
@@ -62,7 +63,10 @@ const Login = () => {
                 />
                 <label className="label">
                   <p>
-                    Don't have an account? <Link to="/register">Register</Link>
+                    Don't have an account?
+                    <Link to="/register" className="btn btn-link pl-1">
+                      Register
+                    </Link>
                   </p>
                 </label>
               </div>
