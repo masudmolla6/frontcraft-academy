@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
 
+  const { user, loading, signIn } = useContext(AuthContext);
+  
+
+  const [error, setError] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -10,12 +15,24 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
         console.log(email, password);
+
+      signIn(email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user);
+          form.reset();
+        })
+        .catch(error => {
+        console.error(error);
+      })
     }
 
     return (
       <div className="hero bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center">
+            {/* <img src={user?.photoURL} alt="" /> */}
+            <h2>{ user?.email}</h2>
             <h1 className="text-5xl font-bold">Login now!</h1>
           </div>
           <div className="card w-96 shadow-2xl bg-base-100">
@@ -26,7 +43,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  name='email'
+                  name="email"
                   placeholder="Enter Your Email"
                   className="input input-bordered"
                   required
@@ -38,13 +55,15 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  name='password'
+                  name="password"
                   placeholder="Enter Your Password"
                   className="input input-bordered"
                   required
                 />
                 <label className="label">
-                    <p>Don't have an account? <Link to='/register'>Register</Link></p>
+                  <p>
+                    Don't have an account? <Link to="/register">Register</Link>
+                  </p>
                 </label>
               </div>
               <div className="form-control mt-6">

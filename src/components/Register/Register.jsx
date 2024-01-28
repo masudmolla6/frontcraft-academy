@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
+import { FaGoogle,FaGithub } from "react-icons/fa";
 
 const Register = () => {
+  const { user, createUser } = useContext(AuthContext);
+
         const handleSubmit = (event) => {
           event.preventDefault();
           const form = event.target;
@@ -9,17 +13,28 @@ const Register = () => {
           const photoUrl = form.photo_url.value;
           const email = form.email.value;
           const password = form.password.value;
-          console.log(name, photoUrl,email, password);
+          console.log(name, photoUrl, email, password);
+          
+          createUser(email, password)
+            .then((result) => {
+              const createdUser = result.user;
+              console.log(createdUser);
+              form.reset();
+            })
+            .catch(error => {
+            console.error(error);
+          })
+
         };
 
     return (
-      <div className="hero bg-base-200">
+      <div className="hero w-full bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center">
             <h1 className="text-5xl font-bold">Register now!</h1>
           </div>
           <div className="card w-96 shadow-2xl bg-base-100">
-            <form onSubmit={handleSubmit} className="card-body">
+            <form onSubmit={handleSubmit} className="card-body w-96">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Full Name</span>
@@ -77,6 +92,18 @@ const Register = () => {
                 <button className="btn btn-primary">Register</button>
               </div>
             </form>
+            <div className="py-4 flex justify-center items-center">
+              <hr className="w-1/3 px-2 mx-2" /> OR{" "}
+              <hr className="w-1/3 mx-2" />
+            </div>
+            <div className="flex gap-2 justify-center items-center pb-5">
+              <button className="btn btn-info w-5/12">
+                <FaGoogle className='text-2xl'></FaGoogle>Google
+              </button>
+              <button className="btn btn-info w-5/12">
+                <FaGithub className='text-3xl'></FaGithub>Github
+              </button>
+            </div>
           </div>
         </div>
       </div>
