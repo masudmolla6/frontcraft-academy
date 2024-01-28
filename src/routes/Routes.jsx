@@ -5,6 +5,7 @@ import Courses from "../components/Courses/Courses";
 import Blog from "../components/Blog/Blog";
 import FAQ from "../components/FAQ/FAQ";
 import Login from "../components/Login/Login";
+import Register from "../components/Register/Register";
 
 const router = createBrowserRouter([
     {
@@ -15,8 +16,13 @@ const router = createBrowserRouter([
             { path: '/courses', element: <Courses></Courses> },
             { path: 'blog', element: <Blog></Blog> },
             { path: '/faq', element: <FAQ></FAQ> },
-            {path:'/login', element:<Login></Login>}
+            { path: '/login', element: <Login></Login> },
+            {path:'/register', element:<Register></Register>}
         ]
+    },
+    {
+        path: "*",
+        element: <div className="w-full h-screen flex justify-center items-center text-3xl text-blue-600">Not Found 404 !!!</div>
     }
 ])
 

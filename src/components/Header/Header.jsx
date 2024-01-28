@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { TfiBook,TfiAlignRight,TfiClose } from "react-icons/tfi";
+import DarkMode from '../DarkMode/DarkMode';
 
 const Header = () => {
     const [nav, setNav] = useState(false);
     const handleNavigation = () => {
         setNav(!nav);
     }
-    return (
+  return (
+      <div className='sticky top-0 z-30'>
       <div className="navbar bg-neutral text-neutral-content flex justify-between w-full px-12">
         <div className="w-full">
           <TfiBook className="text-3xl text-emerald-400"></TfiBook>
@@ -18,9 +20,9 @@ const Header = () => {
         </div>
 
         {/* Desktop Nav menu*/}
-        <div className="w-full justify-end hidden md:flex">
+        <div className="w-full justify-end items-center hidden md:flex">
           <ul className="flex">
-            <li className="px-6 text-xl text-white hover:text-orange-500">
+            <li className="px-4 text-xl text-white hover:text-orange-500">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -32,7 +34,7 @@ const Header = () => {
                 Home
               </NavLink>
             </li>
-            <li className="px-6 text-xl text-white hover:text-orange-500">
+            <li className="px-4 text-xl text-white hover:text-orange-500">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -44,7 +46,7 @@ const Header = () => {
                 Courses
               </NavLink>
             </li>
-            <li className="px-6 text-xl text-white hover:text-orange-500">
+            <li className="px-4 text-xl text-white hover:text-orange-500">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -56,7 +58,7 @@ const Header = () => {
                 Blog
               </NavLink>
             </li>
-            <li className="px-6 text-xl text-white hover:text-orange-500">
+            <li className="px-4 text-xl text-white hover:text-orange-500">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -68,7 +70,7 @@ const Header = () => {
                 FAQ
               </NavLink>
             </li>
-            <li className="px-6 text-xl text-white hover:text-orange-500">
+            <li className="px-4 text-xl text-white hover:text-orange-500">
               <NavLink
                 className={({ isActive }) =>
                   isActive
@@ -79,6 +81,9 @@ const Header = () => {
               >
                 LogIn
               </NavLink>
+            </li>
+            <li className="px-2 text-xl text-white hover:text-orange-500">
+              <DarkMode></DarkMode>
             </li>
           </ul>
         </div>
@@ -102,6 +107,9 @@ const Header = () => {
                 : "ease-in-out w-[60%] duration-500 fixed top-16 bottom-0 left-[-100%]"
             }
           >
+            <li className="py-2 border-b rounded-xl hover:bg-blue-400 duration-300 hover:text-black text-white w-full text-center border-gray-600">
+              <DarkMode></DarkMode>
+            </li>
             <li className="py-2 border-b rounded-xl hover:bg-blue-400 duration-300 hover:text-black text-white w-full text-center border-gray-600">
               <NavLink
                 className={({ isActive }) =>
@@ -154,6 +162,7 @@ const Header = () => {
             </li>
           </ul>
         </div>
+      </div>
       </div>
     );
 };
