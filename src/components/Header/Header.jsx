@@ -9,7 +9,7 @@ const Header = () => {
         setNav(!nav);
     }
   return (
-      <div className='sticky top-0 z-30'>
+    <div className="sticky top-0 z-30">
       <div className="navbar bg-neutral text-neutral-content flex justify-between w-full px-12">
         <div className="w-full">
           <TfiBook className="text-3xl text-emerald-400"></TfiBook>
@@ -26,7 +26,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-blue-500 px-8 py-1 rounded-full flex items-center"
+                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
                     : undefined
                 }
                 to="/"
@@ -38,7 +38,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-blue-500 px-8 py-1 rounded-full flex items-center"
+                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
                     : undefined
                 }
                 to="/courses"
@@ -50,7 +50,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-blue-500 px-8 py-1 rounded-full flex items-center"
+                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
                     : undefined
                 }
                 to="/blog"
@@ -62,7 +62,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-blue-500 px-8 py-1 rounded-full flex items-center"
+                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
                     : undefined
                 }
                 to="/faq"
@@ -74,7 +74,7 @@ const Header = () => {
               <NavLink
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-blue-500 px-8 py-1 rounded-full flex items-center"
+                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
                     : undefined
                 }
                 to="/login"
@@ -163,8 +163,8 @@ const Header = () => {
           </ul>
         </div>
       </div>
-      </div>
-    );
+    </div>
+  );
 };
 
 export default Header;
