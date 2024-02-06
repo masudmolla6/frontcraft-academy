@@ -9,6 +9,7 @@ import Register from "../components/Register/Register";
 import Topics from "../components/Topics/Topics";
 import Details from "../components/Details/Details";
 import PrivateRoute from "../components/PrivateRoute/PrivateRoute";
+import UserInfo from "../components/UserInfo/UserInfo";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       { path: "/faq", element: <FAQ></FAQ> },
       { path: "/login", element: <Login></Login> },
       { path: "/register", element: <Register></Register> },
-        {
+      {
             path: "/courses/:id",
             element: <Topics></Topics>,
             loader: ({params}) => {
@@ -29,8 +30,8 @@ const router = createBrowserRouter([
                   `https://frontcraft-academy-server.vercel.app/courses/${params.id}`
                 );
             }
-        },
-        {
+      },
+      {
             path: "/courses/topic/:id",
             element: <PrivateRoute><Details></Details></PrivateRoute>,
             loader: ({params}) => {
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
                   `https://frontcraft-academy-server.vercel.app/courses/topic/${params.id}`
                 );
             }
-        }
+      },
+      {
+        path: '/user',
+        element:<UserInfo></UserInfo>
+      }
     ],
   },
   {

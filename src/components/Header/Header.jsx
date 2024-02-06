@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { TfiBook,TfiAlignRight,TfiClose } from "react-icons/tfi";
+import React, { useContext, useState } from 'react';
+import { Link, NavLink, Navigate } from 'react-router-dom';
+import { TfiBook,TfiAlignRight,TfiClose ,TfiUser} from "react-icons/tfi";
 import DarkMode from '../DarkMode/DarkMode';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Header = () => {
-    const [nav, setNav] = useState(false);
+  const [nav, setNav] = useState(false);
+  const { user, logOut } = useContext(AuthContext);
+
+  
+    const handleLogout = () => {
+      logOut()
+        .then(() => {})
+        .then((error) => console.error(error));
+    };
+
+  console.log(user);
+
+  const handleUserInfo = () => {
+    <Navigate to='/user'></Navigate>
+  }
+
     const handleNavigation = () => {
         setNav(!nav);
     }
@@ -71,20 +87,43 @@ const Header = () => {
               </NavLink>
             </li>
             <li className="px-4 text-xl text-white hover:text-orange-500">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center"
-                    : undefined
-                }
-                to="/login"
-              >
-                LogIn
-              </NavLink>
+              {user ? (
+                <NavLink
+                  onClick={handleLogout}
+                  className={({ isActive }) => (isActive ? "" : undefined)}
+                >
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? " border-b-2 border-emerald-500 px-6 rounded-xl flex items-center justify-center"
+                      : undefined
+                  }
+                  to="/login"
+                >
+                  LogIn
+                </NavLink>
+              )}
             </li>
             <li className="px-2 text-xl text-white hover:text-orange-500">
               <DarkMode></DarkMode>
             </li>
+            {user && (
+              <li
+                className="px-2 text-xl text-white hover:text-orange-500 flex justify-center items-center tooltip tooltip-left"
+                data-tip={user?.email}
+              >
+                <Link
+                  className="border rounded-full p-2 hover:bg-sky-400"
+                  to="user"
+                >
+                  {" "}
+                  <TfiUser className=""></TfiUser>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -107,6 +146,22 @@ const Header = () => {
                 : "ease-in-out w-[60%] duration-500 fixed top-16 bottom-0 left-[-100%]"
             }
           >
+            <li className="py-2 border-b rounded-xl hover:bg-blue-400 duration-300 hover:text-black text-white w-full text-center border-gray-600">
+              {user && (
+                <li
+                  className="px-2 text-xl text-white hover:text-orange-500 flex justify-center items-center tooltip tooltip-left"
+                  data-tip={user?.email}
+                >
+                  <Link
+                    className="border rounded-full p-2 hover:bg-sky-400"
+                    to="user"
+                  >
+                    {" "}
+                    <TfiUser className=""></TfiUser>
+                  </Link>
+                </li>
+              )}
+            </li>
             <li className="py-2 border-b rounded-xl hover:bg-blue-400 duration-300 hover:text-black text-white w-full text-center border-gray-600">
               <DarkMode></DarkMode>
             </li>
@@ -151,14 +206,23 @@ const Header = () => {
               </NavLink>
             </li>
             <li className="py-2 border-b rounded-xl hover:bg-blue-400 duration-300 hover:text-black  text-white text-center border-gray-600 w-full">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-amber-600" : undefined
-                }
-                to="/login"
-              >
-                LogIn
-              </NavLink>
+              {user ? (
+                <NavLink
+                  onClick={handleLogout}
+                  className={({ isActive }) => (isActive ? "" : undefined)}
+                >
+                  Logout
+                </NavLink>
+              ) : (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? " text-amber-600" : undefined
+                  }
+                  to="/login"
+                >
+                  LogIn
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>

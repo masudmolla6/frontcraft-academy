@@ -38,7 +38,7 @@ const Login = () => {
     }
 
     return (
-      <div className="hero bg-base-200">
+      <div className="hero bg-base-200 h-screen">
         <div className="hero-content flex-col">
           <div className="text-center">
             <h2>{error}</h2>
