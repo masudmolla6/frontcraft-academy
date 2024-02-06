@@ -2,7 +2,13 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 
 const Home = () => {
-    const { user, loading } = useContext(AuthContext);
+    const { user, loading, logOut } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logOut()
+            .then(() => { })
+        .then(error=>console.error(error))
+    }
     
     if (loading) {
         return (
@@ -15,6 +21,7 @@ const Home = () => {
     return (
         <div>
             <h1>Home page.</h1>
+            <button onClick={handleLogout}>LogOut</button>
         </div>
     );
 };

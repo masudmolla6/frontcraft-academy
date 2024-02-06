@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { FaGoogle,FaGithub } from "react-icons/fa";
 
@@ -8,6 +8,12 @@ const Register = () => {
   
 
   const [error, setError] = useState('');
+
+  const Navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
   
 
 
@@ -25,6 +31,7 @@ const Register = () => {
               const createdUser = result.user;
               console.log(createdUser);
               form.reset();
+              Navigate(from, { replace: true });
             })
             .catch(error => {
             setError(error);
@@ -117,7 +124,7 @@ const Register = () => {
                   </p>
                 </label>
               </div>
-              <div className="form-control mt-6">
+              <div className="form-control mt-4">
                 <button className="btn btn-primary">Register</button>
               </div>
             </form>
