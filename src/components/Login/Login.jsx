@@ -1,6 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+  
 
 const Login = () => {
 
@@ -48,16 +51,19 @@ const Login = () => {
 
   const handleForgetPassword = () => {
     if (!userEmail) {
-      
+      toast("Please Enter Your Email");
     }
     passwordReset(userEmail)
-      .then(() => { })
+      .then(() => {
+        toast("Please Check Your Email And Reset Pssword.")
+      })
       .then(error => console.error(error))
     
   }
 
     return (
       <div className="hero bg-base-200 h-screen">
+        <ToastContainer></ToastContainer>
         <div className="hero-content flex-col">
           <div className="text-center">
             <h2>{error}</h2>
@@ -100,7 +106,10 @@ const Login = () => {
                 <label className="label py-0">
                   <p>
                     Forget Password?
-                    <Link onClick={handleForgetPassword} className="btn btn-link pl-1">
+                    <Link
+                      onClick={handleForgetPassword}
+                      className="btn btn-link pl-1"
+                    >
                       Reset
                     </Link>
                   </p>
