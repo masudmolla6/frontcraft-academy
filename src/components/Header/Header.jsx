@@ -17,9 +17,6 @@ const Header = () => {
 
   console.log(user);
 
-  const handleUserInfo = () => {
-    <Navigate to='/user'></Navigate>
-  }
 
     const handleNavigation = () => {
         setNav(!nav);
@@ -117,7 +114,7 @@ const Header = () => {
               >
                 <Link
                   className="border rounded-full p-2 hover:bg-sky-400"
-                  to="user"
+                  to="/user"
                 >
                   {" "}
                   <TfiUser className=""></TfiUser>

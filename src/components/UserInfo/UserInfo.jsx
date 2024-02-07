@@ -13,10 +13,14 @@ const UserInfo = () => {
     }
 
     return (
-        <div>
-            <h1>{user.displayName}</h1>
-            <p>{ user.email}</p>
+      <div className="w-full h-screen flex justify-center items-center">
+        <div className="">
+          <h1 className='text-2xl'>{user.displayName}</h1>
+          <img src={user?.photoUrl} alt="" />
+          <p className='text-xl'>Email-{user.email}</p>
+          <p className='text-xl'>providerId-{user?.providerId}</p>
         </div>
+      </div>
     );
 };
 
