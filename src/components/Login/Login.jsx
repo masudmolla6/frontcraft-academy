@@ -4,7 +4,9 @@ import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
 
-  const { user, loading, signIn } = useContext(AuthContext);
+  const { user, loading, signIn, passwordReset } = useContext(AuthContext);
+  
+  const [userEmail, setUserEmail] = useState('');
   
 
   const [error, setError] = useState('');
@@ -15,7 +17,7 @@ const Login = () => {
   // console.log(location);
 
   const from = location.state?.from?.pathname || "/";
-  console.log(from);
+  // console.log(from);
 
     const handleSubmit = (event) => {
       event.preventDefault();
@@ -35,7 +37,24 @@ const Login = () => {
           setError(error.message);
           // console.log(error);
       })
+  }
+  
+  const handleEmailBlur = (event) => {
+    const email = event.target.value;
+    setUserEmail(email);
+    console.log(email);
+
+  }
+
+  const handleForgetPassword = () => {
+    if (!userEmail) {
+      
     }
+    passwordReset(userEmail)
+      .then(() => { })
+      .then(error => console.error(error))
+    
+  }
 
     return (
       <div className="hero bg-base-200 h-screen">
@@ -51,6 +70,7 @@ const Login = () => {
                   <span className="label-text">Email</span>
                 </label>
                 <input
+                  onBlur={handleEmailBlur}
                   type="email"
                   name="email"
                   placeholder="Enter Your Email"
@@ -69,11 +89,19 @@ const Login = () => {
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
+                <label className="label pb-0">
                   <p>
                     Don't have an account?
                     <Link to="/register" className="btn btn-link pl-1">
                       Register
+                    </Link>
+                  </p>
+                </label>
+                <label className="label py-0">
+                  <p>
+                    Forget Password?
+                    <Link onClick={handleForgetPassword} className="btn btn-link pl-1">
+                      Reset
                     </Link>
                   </p>
                 </label>
